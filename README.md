@@ -32,21 +32,11 @@ atcoder/rust/
 #### セットアップ
 
 ```bash
-cd atcoder/rust
-
-cat > Cargo.toml <<'EOF'
-[package]
-name = "atcoder"
-version = "0.0.0"
-edition = "2021"
-
-[dependencies]
-proconio = { version = "0.5.0", features = ["derive"] }
-EOF
-
-mkdir -p src/bin
-
-printf 'target/\nCargo.lock\n' > .gitignore
+cd atcoder
+cargo new rust --name atcoder                  # Cargo.toml / src / .gitignore を生成
+cd rust
+cargo add proconio@=0.5.0 --features derive    # 入力パース用クレートを追加
+mkdir src/bin && rm src/main.rs                # 1問1ファイル運用のため src/bin に切り替え
 ```
 
 #### 解き方
