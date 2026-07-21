@@ -4,7 +4,20 @@
 
 ## 構成
 
-`atcoder/rust/` に 1 つの Cargo パッケージを置き、1問 = 1ファイルで `src/bin/` に並べる。
+サイトごとにディレクトリを分け、その配下に言語ごとのディレクトリを置く。
+
+```
+.
+├── atcoder/
+│   └── rust/
+└── <他サイトを始めたら同様に追加 (leetcode/ など)>
+```
+
+各ディレクトリのセットアップ・解き方は以下のセクションに追記していく。
+
+## atcoder/rust
+
+1 つの Cargo パッケージに、1問 = 1ファイルで `src/bin/` に並べる。
 
 ```
 atcoder/rust/
@@ -14,7 +27,7 @@ atcoder/rust/
     └── abc300_b.rs
 ```
 
-## セットアップ
+### セットアップ
 
 ```bash
 cd atcoder/rust
@@ -34,13 +47,13 @@ mkdir -p src/bin
 printf 'target/\nCargo.lock\n' > .gitignore
 ```
 
-## 解き方
+### 解き方
 
-1. `atcoder/rust/src/bin/<コンテスト>_<問題>.rs` を作って解く
+1. `src/bin/<コンテスト>_<問題>.rs` を作って解く
 2. `cargo run --bin abc300_a` で実行し、サンプル入力を貼って動作確認（Ctrl+D で入力終了）
 3. ファイルの中身を AtCoder の提出フォームに貼り付けて提出（言語は Rust (rustc 1.89.0)）
 
-## 注意
+### 注意
 
 - ジャッジ環境は Rust 1.89.0。使えるクレートとバージョンは
   [言語・ライブラリ一覧](https://img.atcoder.jp/file/language-update/2025-10/language-list.html) を参照
