@@ -6,7 +6,7 @@
 
 ```
 .
-├── Makefile              # AtCoder ログイン用 (make login)
+├── Makefile              # `make login` ターゲットを提供 (現状はAtCoderログイン用のみ)
 ├── scripts/
 │   └── set_atcoder_cookie.sh
 └── atcoder/
