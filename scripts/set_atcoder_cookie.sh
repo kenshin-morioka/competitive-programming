@@ -15,15 +15,14 @@ fi
 
 mkdir -p "$COOKIE_DIR"
 
-expires=$(date -u -v+180d +"%Y-%m-%dT%H:%M:%SZ")
-
-value="$value" expires="$expires" python3 - "$COOKIE_PATH" <<'PYEOF'
+value="$value" python3 - "$COOKIE_PATH" <<'PYEOF'
 import json
 import os
 import sys
+from datetime import datetime, timedelta, timezone
 
 value = os.environ["value"]
-expires = os.environ["expires"]
+expires = (datetime.now(timezone.utc) + timedelta(days=180)).strftime("%Y-%m-%dT%H:%M:%SZ")
 path = sys.argv[1]
 
 entry = {
