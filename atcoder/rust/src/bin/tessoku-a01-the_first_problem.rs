@@ -1,3 +1,8 @@
+use proconio::input;
+
 fn main() {
-    println!("a");
+    input! {
+        n: i32,
+    }
+    println!("{}", n * n);
 }
