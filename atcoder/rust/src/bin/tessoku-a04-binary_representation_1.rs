@@ -61,3 +61,7 @@ fn main() {
     let result: String = arr.iter().map(|x| x.to_string()).collect();
     println!("{}", result);
 }
+
+// memo1:
+// .rev() → イテレータの順番を逆にする
+// .reverse() → Vec やスライスそのものの要素順を逆にする
