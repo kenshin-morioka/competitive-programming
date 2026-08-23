@@ -17,7 +17,7 @@ fn main() {
     let mut count = 0;
     let mut seconds = 0;
 
-    for i in 0..10.poe(9).enumerate() {
+    for i in (0..10.pow(9)).enumerate() {
         while count < k {}
     }
 }
