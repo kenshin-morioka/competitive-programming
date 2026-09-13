@@ -1,3 +1,4 @@
+// 自分の回答 (ACだが O(N * D))
 use proconio::input;
 use std::io::{self, BufWriter, Write};
 
@@ -8,18 +9,17 @@ fn main() {
         lr:[(usize,usize);n],
     }
 
-    let mut diff = vec![0i64; d + 2];
-    for (l, r) in lr {
-        diff[l] += 1;
-        diff[r + 1] -= 1;
-    }
+    let mut ans = vec![0u64; d + 1];
 
     let out = io::stdout();
     let mut out = BufWriter::new(out.lock());
 
-    let mut curr = 0i64;
+    for (l, r) in lr {
+        for i in l..=r {
+            ans[i] += 1;
+        }
+    }
     for i in 1..=d {
-        curr += diff[i];
-        writeln!(out, "{}", curr).unwrap();
+        writeln!(out, "{}", ans[i]).unwrap();
     }
 }

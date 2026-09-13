@@ -1,0 +1,41 @@
+// 自分の回答 (O(Q * H * W))
+use proconio::input;
+use std::io::{self, BufWriter, Write};
+
+fn main() {
+    input! {
+        h:usize,
+        w:usize,
+        x:[[usize;w];h],
+        q:usize,
+        a:[[usize;4];q],
+    }
+
+    let out = io::stdout();
+    let mut out = BufWriter::new(out.lock());
+    for j in a {
+        let mut s = 0usize;
+        for (i, v) in x.iter().enumerate() {
+            if i + 1 < j[0] || i + 1 > j[2] {
+                continue;
+            }
+            s += v[j[1] - 1..j[3]].iter().sum::<usize>();
+        }
+        writeln!(out, "{}", s).unwrap();
+    }
+}
+
+// memo1:
+// マス目のような入力を受け取る時はVec<Vec<>>のような多次元配列で受け取る。
+// マスの情報が文字列の場合：
+// ```
+// use proconio::{input, maker::Chars};
+// ...
+// input! {
+//     h:useize,
+//     w:usize,
+//     x:[Chars;h],
+// }
+// ```
+// とする。wの入力時の制約は競プロではかけないことが多い。
+// マスの情報が整数で空白区切りの場合：回答の通りに書く

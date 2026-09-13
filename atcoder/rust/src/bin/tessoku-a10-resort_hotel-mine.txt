@@ -1,0 +1,23 @@
+// 自分の回答 (O(N * D) で TLE 級)
+use proconio::input;
+use std::io::{self, BufWriter, Write};
+
+fn main() {
+    input! {
+        n:usize,
+        a:[u32;n],
+        d:usize,
+        lr:[(usize,usize);d],
+    }
+
+    let out = io::stdout();
+    let mut out = BufWriter::new(out.lock());
+
+    for (l, r) in lr {
+        let mut room = Vec::<u32>::new();
+        room.extend(&a[..l - 1]);
+        room.extend(&a[r - 1..]);
+
+        writeln!(out, "{}", room.iter().max().unwrap()).unwrap();
+    }
+}

@@ -1,0 +1,44 @@
+// 自分の回答 (TLE: x == a[mid] のとき無限ループ)
+use proconio::input;
+use std::io::{self, BufWriter, Write};
+
+fn main() {
+    input! {
+        n:usize,
+        x:u32,
+        mut a:[u32;n],
+    }
+
+    let out = io::stdout();
+    let mut out = BufWriter::new(out.lock());
+
+    // 全探索（線形探索）
+    // for (i, v) in a.iter().enumerate() {
+    //     if v == &x {
+    //         writeln!(out, "{}", i + 1).unwrap();
+    //     }
+    // }
+
+    let mut i: Vec<usize> = (1..=n).collect();
+    let mut mid: usize;
+    while a.len() != 1 {
+        mid = a.len() / 2;
+        if x < a[mid] {
+            a = a[..mid].to_vec();
+            i = i[..mid].to_vec();
+        } else if x > a[mid] {
+            a = a[mid + 1..].to_vec();
+            i = i[mid + 1..].to_vec();
+        }
+    }
+    writeln!(out, "{}", i[0]).unwrap();
+}
+
+// memo1:
+// to_vec() をしないと型の不一致のためエラーになる
+// Vec<u32> と [u32]（または &[u32]）は別の型
+// Vec<u32>は要素を所有している、サイズ変更可能なコンテナ
+// [u32]は連続した要素の範囲を表す型
+// memo2:
+// 初期値が不要な変数を定義する場合は、let a;（可変ならlet mut a;）で良い。
+// 型は最初に代入される値で決まるが、事前に指定したいならlet a: u32;

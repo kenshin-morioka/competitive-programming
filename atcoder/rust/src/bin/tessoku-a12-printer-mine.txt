@@ -1,0 +1,24 @@
+// 自分の回答 (シミュレーション。TLE 級 + 等号のバグあり)
+use proconio::input;
+
+fn main() {
+    input! {
+        n:usize,
+        k:u32,
+        a:[u32;n],
+    }
+
+    let mut count = 0;
+    let mut second = 0;
+
+    while count <= k {
+        second += 1;
+        a.iter().for_each(|x| {
+            if second % x == 0 {
+                count += 1;
+            }
+        });
+    }
+
+    println!("{}", second);
+}
