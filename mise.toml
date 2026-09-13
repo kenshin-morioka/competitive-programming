@@ -1,0 +1,53 @@
+[tasks.new]
+description = "問題の3ファイル (.rs / -mine.txt / -review.md) を生成する"
+usage = '''
+arg "<name>" help="問題名 (例: tessoku-a13-calculate_distance)"
+'''
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+name="${usage_name:-${1:-}}"
+if [ -z "$name" ]; then
+  echo "usage: mise run new <name>   (例: mise run new tessoku-a13-calculate_distance)" >&2
+  exit 1
+fi
+
+dir="atcoder/rust/src/bin"
+rs="$dir/$name.rs"
+mine="$dir/$name-mine.txt"
+review="$dir/$name-review.md"
+
+for f in "$rs" "$mine" "$review"; do
+  if [ -e "$f" ]; then
+    echo "既に存在します: $f" >&2
+    exit 1
+  fi
+done
+
+cat > "$rs" <<EOF
+use proconio::input;
+
+fn main() {
+    input! {
+        n: usize,
+    }
+    println!("{}", n);
+}
+EOF
+
+cat > "$mine" <<EOF
+// 自分の回答 ()
+EOF
+
+cat > "$review" <<EOF
+# $name 添削
+EOF
+
+echo "created:"
+echo "  $rs      <- 添削後の回答 (実行対象)"
+echo "  $mine    <- 自分の回答"
+echo "  $review  <- 添削ポイント"
+echo
+echo "run: cargo run --bin $name"
+'''
